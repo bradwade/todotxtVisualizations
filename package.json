@@ -1,0 +1,22 @@
+{
+  "name": "todotxtvisualizations",
+  "version": "0.1.0",
+  "description": "Visualizations of todo.txt formatted to do items.",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brad Wade",
+  "license": "ISC",
+  "dependencies": {
+    "jstodotxt": "jmhobbs/jsTodoTxt#0.8.0",
+    "typography": "^0.16.19",
+    "typography-theme-grand-view": "^0.16.19"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "sass": "^1.26.5"
+  }
+}
