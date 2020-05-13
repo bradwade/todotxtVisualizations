@@ -52,6 +52,6 @@ export const utilities = {
       new DueExtension2(),
     ] );
     return todoArray;
-  }
+  },
 
 }

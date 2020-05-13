@@ -25,6 +25,17 @@ function loadInitialData(initialData) {
   let todoArray = utilities.textToArray(initialData);
   console.log(todoArray);
   textDisplayArea.textContent = initialData;
+  todoArray.sort(function(a, b) {
+    if (a.priority == null && b.priority == null) return 0;
+    if (a.priority == null || a.priority > b.priority) {
+      return 1;
+    }
+    if (b.priority == null || a.priority < b.priority) {
+      return -1;
+    }
+    return 0;
+  });
+  console.log(todoArray)
   utilities.fillTable(todoArray);
 }
 
