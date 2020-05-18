@@ -12,10 +12,17 @@
   "license": "ISC",
   "dependencies": {
     "jstodotxt": "jmhobbs/jsTodoTxt#0.8.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
     "typography": "^0.16.19",
     "typography-theme-grand-view": "^0.16.19"
   },
   "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-react": "^7.9.4",
     "parcel-bundler": "^1.12.4",
     "sass": "^1.26.5"
   }

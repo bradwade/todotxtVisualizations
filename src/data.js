@@ -10,4 +10,5 @@ x 2020-05-02 create an initial table to fill +tdtv due:2020-06-01
 (B) Design a todo item tile - https://material.io/components due:2020-06-01
 (A) Determine how we store data, retrieve, sort, filter, query. lodash sortBy - https://lodash.com/docs/4.17.15#sortBy
 (B) sass - pull in a normalize?
-(A) Decide on templating... react?`;
+x 2020-05-14 (A) Decide on templating... react?
+Review different parsers such as https://www.npmjs.com/package/todotxt-parser`;

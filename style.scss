@@ -17,7 +17,7 @@ h1 {
   color: #eee;
 }
 
-.site-header {
+.site-header, .site-footer {
   background-color: $primary-dark;
   color: white;
   padding: 20px;
@@ -25,6 +25,68 @@ h1 {
 
 .site-main {
   padding: 20px;
+  @media all and (min-width: 500px) {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.site-navigation {
+  background-color: $primary;
+  .menu {
+    padding: 0;
+    margin: 0 0 25px 0;
+    list-style: none;
+  }
+  .menu__item {
+    margin: 0;
+    padding: 0;
+    a {
+      display: block;
+      border-top: 1px solid $secondary-dark;
+      width: 100%;
+      color: white;
+      padding: 5px;
+      cursor: pointer;
+    }
+  }
+}
+
+.site-content {
+  background-color: $primary-light;
+  padding: 20px;
+  width: 100%;
+  @media all and (min-width: 500px) {
+    margin-left: 20px;
+  }
+}
+
+html, body, #app {
+  height: 100%;
+}
+
+.todo-visualizations {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+.site-main {
+  flex: 1 0 auto;
+}
+.site-header, .site-footer {
+  flex-shrink: 0;
+}
+
+.kanban-view {
+  display: flex;
+  .column {
+    flex: 1 0;
+    margin: 10px;
+    padding: 10px;
+    background-color: #eee;
+    min-height: 200px
+  }
 }
 
 .dropbox{
@@ -44,6 +106,7 @@ textarea {
 
 table {
   border: 1px solid $secondary-light;
+  background-color: white;
 }
 
 td, th, td:first-child, th:first-child {

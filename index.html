@@ -1,44 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Todo.txt experiments</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Todo.txt Visualizations</title>
   <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:wght@700&display=swap" rel="stylesheet"> 
-  <link rel="stylesheet" href="./style.scss">
 </head>
 <body>
-<header class="site-header">
-  <h1>Todo.txt visualizations</h1>
-</header>
-<main class="site-main">
 
-  <table id="todoTable">
-    <thead>
-      <tr>
-        <th>P</th>
-        <th>X</th>
-        <th>Status</th>
-        <th>Due</th>
-        <th>Date</th>
-        <th>Description</th>
-        <th>Project</th>
-        <th>Context</th>
-      </tr>
-    </thead>
-    <tbody class="table-body">
-    </tbody>
-  </table>
 
-  <h2>Load Data</h2>
-  <p>Browse for a todo.txt file or drag-and-drop a file on the grey square.</p>
-  <form>
-    <input type="file" id="todoFile">
-  </form>
-  <div class="dropbox" id="dropbox">
-    (drag and drop box)
-  </div>
-  <pre id="textDisplayArea">(todo.txt will display here)</pre>
-</main>
-<script src="./src/script.js" type="module"></script>
+<div id="app"></div>
+
+<script src="src/index.js"></script>
 </body>
 </html>
