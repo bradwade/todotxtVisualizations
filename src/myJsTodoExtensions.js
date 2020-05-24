@@ -1,5 +1,5 @@
 import { TodoTxt } from 'jstodotxt';
-import { TodoTxtExtension } from '../node_modules/jstodotxt/jsTodoExtensions.js';
+import { TodoTxtExtension } from 'jstodotxt/jsTodoExtensions';
 export function WorkflowExtension() {
     this.name = "wf";
 }

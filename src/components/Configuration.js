@@ -8,22 +8,14 @@ class Configuration extends React.Component {
   }
 
   handleDrop = (files) => {
-    let fileList = this.state.files;
-    for (var i=0; i < files.length; i++) {
-      if (!files[i].name) return
-      fileList.push(files[i].name)
-    }
-    this.setState({files: fileList})
-    this.processFiles(files);  
+    this.processFiles(files);
   }
 
   handleFileInput = (e) => {
     this.processFiles(e.target.files);
-  };
+  }
 
   processFiles = (fileList) => {
-    
-    console.log(fileList);
     let textBlob = '';
     Array.from(fileList).map(file => {
       const filesReader = new FileReader();
@@ -31,7 +23,7 @@ class Configuration extends React.Component {
 
 
       filesReader.onload = (e) => {
-        textBlob = textBlob = textBlob + e.target.result;
+        textBlob = textBlob + e.target.result;
         textDisplayArea.textContent = textBlob;
         this.props.loadTodoState(textBlob);
       }
@@ -39,7 +31,7 @@ class Configuration extends React.Component {
     });
 
 
-  };
+  }
 
   render() {
     return (

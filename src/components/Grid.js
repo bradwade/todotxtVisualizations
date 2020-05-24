@@ -2,20 +2,20 @@ import React from 'react';
 
 class Grid extends React.Component {
   render () {
-
-  // This sorts list by priority
-  this.props.todo.sort(function(a, b) {
-    if (a.priority == null && b.priority == null) return 0;
-    if (a.priority == null || a.priority > b.priority) {
-      return 1;
-    }
-    if (b.priority == null || a.priority < b.priority) {
-      return -1;
-    }
-    return 0;
-  });
-
     if (!this.props.todo) { return null; }
+
+    // This sorts list by priority
+    this.props.todo.sort(function(a, b) {
+      if (a.priority == null && b.priority == null) return 0;
+      if (a.priority == null || a.priority > b.priority) {
+        return 1;
+      }
+      if (b.priority == null || a.priority < b.priority) {
+        return -1;
+      }
+      return 0;
+    });
+
     return (
       <div className="grid-view">
         <p>Maybe we should include the groupings in this view...</p>
@@ -34,7 +34,7 @@ class Grid extends React.Component {
           </thead>
           <tbody className="table-body">
           {this.props.todo.map((row, key) => (
-            <tr key={key} className="{(i % 2 === 0) ? 'odd' : 'even'}">
+            <tr key={key} className={(key % 2 === 0) ? 'odd' : 'even'}>
               <td className="priority">{(row.priority ? row.priority : '')}</td>
               <td className="complete">{row.complete ? 'X' : ''}</td>
               <td className="workflow">{row.wf ? row.wf : ''}</td>
