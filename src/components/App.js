@@ -9,7 +9,7 @@ import Cleanup from './Cleanup';
 import Configuration from './Configuration';
 import { defaultTodo } from '../data.js';
 import { TodoTxt } from 'jstodotxt';
-import { TodoTxtExtension } from '../../node_modules/jstodotxt/jsTodoExtensions.js';
+import { TodoTxtExtension } from 'jstodotxt/jsTodoExtensions';
 import { WorkflowExtension, DueExtension2 } from '../myJsTodoExtensions';
 
 window.TodoTxtExtension = TodoTxtExtension;
@@ -46,8 +46,12 @@ class App extends React.Component {
             <Navigation />
             <div className="site-content">
               <Switch>
-                <Route exact path="/" component={Grid} />
-                <Route exact path="/grid" 
+                <Route exact path="/" 
+                  render={
+                    (props) => <Grid {...props} todo={this.state.todo} /> 
+                  } 
+                />
+                <Route path="/grid" 
                   render={
                     (props) => <Grid {...props} todo={this.state.todo} /> 
                   } 
@@ -62,7 +66,11 @@ class App extends React.Component {
                   } 
                  />
 
-                <Route component={Grid} />
+                <Route 
+                  render={
+                    (props) => <Grid {...props} todo={this.state.todo} /> 
+                  } 
+                />
               </Switch>
             </div>
           </div>
