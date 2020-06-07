@@ -23,7 +23,7 @@ class App extends React.Component {
 
   loadTodoState = (todoBlob) => {
 
-    const todoArray = TodoTxt.parse( todoBlob, [ 
+    const todoArray = TodoTxt.parse( todoBlob, [
       new WorkflowExtension(),
       new DueExtension2(),
     ] );
@@ -46,30 +46,34 @@ class App extends React.Component {
             <Navigation />
             <div className="site-content">
               <Switch>
-                <Route exact path="/" 
+                <Route exact path="/"
                   render={
-                    (props) => <Grid {...props} todo={this.state.todo} /> 
-                  } 
+                    (props) => <Grid {...props} todo={this.state.todo} />
+                  }
                 />
-                <Route path="/grid" 
+                <Route path="/grid"
                   render={
-                    (props) => <Grid {...props} todo={this.state.todo} /> 
-                  } 
+                    (props) => <Grid {...props} todo={this.state.todo} />
+                  }
                 />
-                <Route path="/kanban" component={Kanban} />
+                <Route path="/kanban"
+                  render={
+                    (props) => <Kanban {...props} todo={this.state.todo} />
+                  }
+                />
                 <Route path="/cleanup" component={Cleanup} />
-                <Route path="/config" 
-                  render={(props) => 
-                    <Configuration {...props} 
-                      loadTodoState={this.loadTodoState} 
-                    /> 
-                  } 
+                <Route path="/config"
+                  render={(props) =>
+                    <Configuration {...props}
+                      loadTodoState={this.loadTodoState}
+                    />
+                  }
                  />
 
-                <Route 
+                <Route
                   render={
-                    (props) => <Grid {...props} todo={this.state.todo} /> 
-                  } 
+                    (props) => <Grid {...props} todo={this.state.todo} />
+                  }
                 />
               </Switch>
             </div>
