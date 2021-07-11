@@ -9,7 +9,7 @@ import Cleanup from './Cleanup';
 import Configuration from './Configuration';
 import { defaultTodo } from '../data.js';
 import { TodoTxt } from 'jstodotxt';
-import { TodoTxtExtension } from '../../node_modules/jstodotxt/jsTodoExtensions.js';
+import { TodoTxtExtension } from 'jstodotxt/jsTodoExtensions';
 import { WorkflowExtension, DueExtension2 } from '../myJsTodoExtensions';
 
 window.TodoTxtExtension = TodoTxtExtension;
@@ -23,7 +23,7 @@ class App extends React.Component {
 
   loadTodoState = (todoBlob) => {
 
-    const todoArray = TodoTxt.parse( todoBlob, [ 
+    const todoArray = TodoTxt.parse( todoBlob, [
       new WorkflowExtension(),
       new DueExtension2(),
     ] );
@@ -46,23 +46,35 @@ class App extends React.Component {
             <Navigation />
             <div className="site-content">
               <Switch>
-                <Route exact path="/" component={Grid} />
-                <Route exact path="/grid" 
+                <Route exact path="/"
                   render={
-                    (props) => <Grid {...props} todo={this.state.todo} /> 
-                  } 
+                    (props) => <Grid {...props} todo={this.state.todo} />
+                  }
                 />
-                <Route path="/kanban" component={Kanban} />
+                <Route path="/grid"
+                  render={
+                    (props) => <Grid {...props} todo={this.state.todo} />
+                  }
+                />
+                <Route path="/kanban"
+                  render={
+                    (props) => <Kanban {...props} todo={this.state.todo} />
+                  }
+                />
                 <Route path="/cleanup" component={Cleanup} />
-                <Route path="/config" 
-                  render={(props) => 
-                    <Configuration {...props} 
-                      loadTodoState={this.loadTodoState} 
-                    /> 
-                  } 
+                <Route path="/config"
+                  render={(props) =>
+                    <Configuration {...props}
+                      loadTodoState={this.loadTodoState}
+                    />
+                  }
                  />
 
-                <Route component={Grid} />
+                <Route
+                  render={
+                    (props) => <Grid {...props} todo={this.state.todo} />
+                  }
+                />
               </Switch>
             </div>
           </div>
