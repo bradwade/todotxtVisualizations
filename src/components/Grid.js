@@ -18,18 +18,14 @@ class Grid extends React.Component {
 
     return (
       <div className="grid-view">
-        <p>Maybe we should include the groupings in this view...</p>
         <table id="todoTable">
           <thead>
             <tr>
               <th>P</th>
               <th>X</th>
               <th>Status</th>
-              <th>Due</th>
               <th>Date</th>
               <th>Description</th>
-              <th>Project</th>
-              <th>Context</th>
             </tr>
           </thead>
           <tbody className="table-body">
@@ -38,11 +34,15 @@ class Grid extends React.Component {
               <td className="priority">{(row.priority ? row.priority : '')}</td>
               <td className="complete">{row.complete ? 'X' : ''}</td>
               <td className="workflow">{row.wf ? row.wf : ''}</td>
-              <td className="due-date">{row.dueString ? row.dueString : ''}</td>
-              <td className="date">{row.dateString() ? row.dateString() : ''}</td>
-              <td className="description">{row.text}</td>
-              <td className="project">{row.projects ? row.projects : ''}</td>
-              <td className="context">{row.contexts ? row.contexts : ''}</td>
+              <td className="date">
+                <div className="date__due">Due: {row.dueString ? row.dueString : ''}</div>
+                <div className="date__done">Done: {row.dateString() ? row.dateString() : ''}</div>  
+              </td>
+              <td className="task">
+                <div className="description">{row.text}</div>
+                <div className="project">Project: {row.projects ? row.projects : ''}</div>
+                <div className="context">Context: {row.contexts ? row.contexts : ''}</div>
+              </td>
             </tr>
             ))}
           </tbody>

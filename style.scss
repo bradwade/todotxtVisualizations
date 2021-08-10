@@ -24,7 +24,7 @@ h1 {
 }
 
 .site-main {
-  padding: 20px;
+  padding: 0px;
   @media all and (min-width: 500px) {
     display: flex;
     justify-content: space-between;
@@ -56,9 +56,6 @@ h1 {
   background-color: $primary-light;
   padding: 20px;
   width: 100%;
-  @media all and (min-width: 500px) {
-    margin-left: 20px;
-  }
 }
 
 html, body, #app {
@@ -107,6 +104,7 @@ textarea {
 table {
   border: 1px solid $secondary-light;
   background-color: white;
+  font-size: 12px;
 }
 
 td, th, td:first-child, th:first-child {
@@ -120,4 +118,9 @@ thead {
 
 tr.even {
   background-color: #eee;
+}
+
+.description {
+  font-size: 16px;
+  font-weight: bold;
 }
