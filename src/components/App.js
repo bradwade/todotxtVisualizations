@@ -1,11 +1,9 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Header from './Header';
 import Navigation from './Navigation';
 import Footer from './Footer';
 import Grid from './Grid';
-import Kanban from './Kanban';
-import Cleanup from './Cleanup';
 import Configuration from './Configuration';
 import { defaultTodo } from '../data.js';
 import { TodoTxt } from 'jstodotxt';
@@ -14,71 +12,61 @@ import { WorkflowExtension, DueExtension2 } from '../myJsTodoExtensions';
 
 window.TodoTxtExtension = TodoTxtExtension;
 
-class App extends React.Component {
-  state = {
-    todo: [],
-    todoBlob: '',
-    workflow: [],
-  };
+const App = () => {
 
-  loadTodoState = (todoBlob) => {
+  const blobParse = (todoBlob) => {
 
     const todoArray = TodoTxt.parse( todoBlob, [ 
       new WorkflowExtension(),
       new DueExtension2(),
     ] );
-    this.setState({
-      todo: todoArray,
-      todoBlob:todoBlob
-    });
+
+    return todoArray;
   }
 
-  componentDidMount() {
-    this.loadTodoState(defaultTodo);
-  }
+  const [todo, setTodo] = useState(blobParse(defaultTodo));
+  const [todoBlob, setTodoBlob] = useState(defaultTodo);
+  const [workflow, setWorkflow] = useState();
 
-  render() {
-    return (
-      <div className="todo-visualizations">
-        <Header />
-        <BrowserRouter>
-          <div className="site-main">
-            <Navigation />
-            <div className="site-content">
-              <Switch>
-                <Route exact path="/" 
-                  render={
-                    (props) => <Grid {...props} todo={this.state.todo} /> 
-                  } 
+  return (
+    <div className="todo-visualizations">
+      <Header />
+      <BrowserRouter>
+        <div className="site-main">
+          <Navigation />
+          <div className="site-content">
+            <Switch>
+              <Route exact path="/" 
+                render={
+                  (props) => <Grid {...props} todo={todo} /> 
+                } 
+              />
+              <Route path="/grid" 
+                render={
+                  (props) => <Grid {...props} todo={todo} /> 
+                } 
+              />
+              <Route path="/config" 
+                render={(props) => 
+                  <Configuration {...props} 
+                    blobParse={blobParse}
+                    setTodo={setTodo}
+                  /> 
+                } 
                 />
-                <Route path="/grid" 
-                  render={
-                    (props) => <Grid {...props} todo={this.state.todo} /> 
-                  } 
-                />
-                <Route path="/kanban" component={Kanban} />
-                <Route path="/cleanup" component={Cleanup} />
-                <Route path="/config" 
-                  render={(props) => 
-                    <Configuration {...props} 
-                      loadTodoState={this.loadTodoState} 
-                    /> 
-                  } 
-                 />
 
-                <Route 
-                  render={
-                    (props) => <Grid {...props} todo={this.state.todo} /> 
-                  } 
-                />
-              </Switch>
-            </div>
+              <Route 
+                render={
+                  (props) => <Grid {...props} todo={todo} /> 
+                } 
+              />
+            </Switch>
           </div>
-        </BrowserRouter>
-        <Footer />
-      </div>
-    )
-  }
+        </div>
+      </BrowserRouter>
+      <Footer />
+    </div>
+  )
 }
 
 export default App;

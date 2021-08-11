@@ -1,11 +1,10 @@
 import React from 'react';
 
-class Grid extends React.Component {
-  render () {
-    if (!this.props.todo) { return null; }
+const Grid = (props) => {
+    if (!props.todo) { return null; }
 
     // This sorts list by priority
-    this.props.todo.sort(function(a, b) {
+    props.todo.sort(function(a, b) {
       if (a.priority == null && b.priority == null) return 0;
       if (a.priority == null || a.priority > b.priority) {
         return 1;
@@ -29,7 +28,7 @@ class Grid extends React.Component {
             </tr>
           </thead>
           <tbody className="table-body">
-          {this.props.todo.map((row, key) => (
+          {props.todo.map((row, key) => (
             <tr key={key} className={(key % 2 === 0) ? 'odd' : 'even'}>
               <td className="priority">{(row.priority ? row.priority : '')}</td>
               <td className="complete">{row.complete ? 'X' : ''}</td>
@@ -49,7 +48,6 @@ class Grid extends React.Component {
         </table>
       </div>
     );
-  }
 }
 
 export default Grid;

@@ -7,8 +7,6 @@ class Navigation extends React.Component {
       <nav className="site-navigation">
         <ul className="menu menu--primary">
           <li className="menu__item"><NavLink to="/grid">Grid</NavLink></li>
-          <li className="menu__item"><NavLink to="/kanban">Kanban</NavLink></li>
-          <li className="menu__item"><NavLink to="/cleanup">Cleanup</NavLink></li>
         </ul>
         <ul className="menu menu--secondary">
           <li className="menu__item"><NavLink to="/config">Settings and Data</NavLink></li>
