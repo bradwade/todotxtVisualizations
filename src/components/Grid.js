@@ -1,7 +1,12 @@
 import React from 'react';
+import WorkflowMenu from './WorkflowMenu';
 
 const Grid = (props) => {
     if (!props.todo) { return null; }
+
+    const bigFilter = (todoItem) => {
+      return todoItem.wf == props.workflow;
+    }
 
     // This sorts list by priority
     props.todo.sort(function(a, b) {
@@ -17,6 +22,7 @@ const Grid = (props) => {
 
     return (
       <div className="grid-view">
+        <WorkflowMenu setWorkflow={props.setWorkflow} todo={props.todo} workflow={props.workflow}/>
         <table id="todoTable">
           <thead>
             <tr>
@@ -28,7 +34,7 @@ const Grid = (props) => {
             </tr>
           </thead>
           <tbody className="table-body">
-          {props.todo.map((row, key) => (
+          {props.todo.filter(bigFilter).map((row, key) => (
             <tr key={key} className={(key % 2 === 0) ? 'odd' : 'even'}>
               <td className="priority">{(row.priority ? row.priority : '')}</td>
               <td className="complete">{row.complete ? 'X' : ''}</td>

@@ -15,18 +15,26 @@ window.TodoTxtExtension = TodoTxtExtension;
 const App = () => {
 
   const blobParse = (todoBlob) => {
-
     const todoArray = TodoTxt.parse( todoBlob, [ 
       new WorkflowExtension(),
       new DueExtension2(),
     ] );
+    return workflowSync(todoArray);
+  }
 
-    return todoArray;
+  const workflowSync = (todoArray) => {
+    const syncedArray = todoArray.map((todoItem) => {
+      if (todoItem.complete) {todoItem.wf = 'done';}
+      if (todoItem.wf == 'done') {todoItem.complete = true;}
+      if (todoItem.wf === undefined) {todoItem.wf = 'new'}
+      return todoItem;
+    });
+    return syncedArray;
   }
 
   const [todo, setTodo] = useState(blobParse(defaultTodo));
   const [todoBlob, setTodoBlob] = useState(defaultTodo);
-  const [workflow, setWorkflow] = useState();
+  const [workflow, setWorkflow] = useState('new');
 
   return (
     <div className="todo-visualizations">
@@ -38,12 +46,12 @@ const App = () => {
             <Switch>
               <Route exact path="/" 
                 render={
-                  (props) => <Grid {...props} todo={todo} /> 
+                  (props) => <Grid {...props} todo={todo} setWorkflow={setWorkflow} workflow={workflow} /> 
                 } 
               />
               <Route path="/grid" 
                 render={
-                  (props) => <Grid {...props} todo={todo} /> 
+                  (props) => <Grid {...props} todo={todo} setWorkflow={setWorkflow} workflow={workflow}/> 
                 } 
               />
               <Route path="/config" 
