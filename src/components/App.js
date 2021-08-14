@@ -32,9 +32,23 @@ const App = () => {
     return syncedArray;
   }
 
-  const [todo, setTodo] = useState(blobParse(defaultTodo));
+  const getUnique = (thing) => {
+    return todo
+    .map(item=>item[thing])
+    .filter((item)=>item)
+    .reduce((acc, e) =>  acc.concat(e), [])
+    .reduce((acc, e) => (acc.includes(e)) ? acc : [e, ...acc], [])
+    .sort();
+  }
+
   const [todoBlob, setTodoBlob] = useState(defaultTodo);
+  const [todo, setTodo] = useState(blobParse(todoBlob));
   const [workflow, setWorkflow] = useState('new');
+  const [categoriesList, setCategoriesList] = useState({
+    contexts: getUnique('contexts'),
+    projects: getUnique('projects')
+  });
+  const [currentCategories, setCurrentCategories] = useState({});
 
   return (
     <div className="todo-visualizations">
@@ -59,6 +73,13 @@ const App = () => {
                   <Configuration {...props} 
                     blobParse={blobParse}
                     setTodo={setTodo}
+                    todo={todo}
+                    currentCategories={currentCategories}
+                    setCurrentCategories={setCurrentCategories}
+                    categoriesList={categoriesList}
+                    setCategoriesList={setCategoriesList}
+                    todoBlob={todoBlob}
+                    setTodoBlob={setTodoBlob}
                   /> 
                 } 
                 />

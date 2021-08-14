@@ -10,13 +10,9 @@ const WorkflowMenu = (props) => {
     return obj;
   }, {});
 
-  console.log(props.todo.map(item=>item.wf));
-
   const wfCountObj = arrToInstanceCountObj(props.todo.map(item=>item.wf));
 
   const wfArray = ['new', 'doing', 'done', 'blocked'];
-
-  console.log(wfCountObj);
 
   return (
     <div className="workflow-menu">

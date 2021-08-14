@@ -1,5 +1,7 @@
 import React from 'react';
 import WorkflowMenu from './WorkflowMenu';
+import Filter from './Filter';
+
 
 const Grid = (props) => {
     if (!props.todo) { return null; }
@@ -22,36 +24,41 @@ const Grid = (props) => {
 
     return (
       <div className="grid-view">
-        <WorkflowMenu setWorkflow={props.setWorkflow} todo={props.todo} workflow={props.workflow}/>
-        <table id="todoTable">
-          <thead>
-            <tr>
-              <th>P</th>
-              <th>X</th>
-              <th>Status</th>
-              <th>Date</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody className="table-body">
-          {props.todo.filter(bigFilter).map((row, key) => (
-            <tr key={key} className={(key % 2 === 0) ? 'odd' : 'even'}>
-              <td className="priority">{(row.priority ? row.priority : '')}</td>
-              <td className="complete">{row.complete ? 'X' : ''}</td>
-              <td className="workflow">{row.wf ? row.wf : ''}</td>
-              <td className="date">
-                <div className="date__due">Due: {row.dueString ? row.dueString : ''}</div>
-                <div className="date__done">Done: {row.dateString() ? row.dateString() : ''}</div>  
-              </td>
-              <td className="task">
-                <div className="description">{row.text}</div>
-                <div className="project">Project: {row.projects ? row.projects : ''}</div>
-                <div className="context">Context: {row.contexts ? row.contexts : ''}</div>
-              </td>
-            </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="grid-column">
+          <Filter />
+        </div>
+        <div className="grid-column">
+          <WorkflowMenu setWorkflow={props.setWorkflow} todo={props.todo} workflow={props.workflow}/>
+          <table id="todoTable">
+            <thead>
+              <tr>
+                <th>P</th>
+                <th>X</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody className="table-body">
+            {props.todo.filter(bigFilter).map((row, key) => (
+              <tr key={key} className={(key % 2 === 0) ? 'odd' : 'even'}>
+                <td className="priority">{(row.priority ? row.priority : '')}</td>
+                <td className="complete">{row.complete ? 'X' : ''}</td>
+                <td className="workflow">{row.wf ? row.wf : ''}</td>
+                <td className="date">
+                  <div className="date__due">Due: {row.dueString ? row.dueString : ''}</div>
+                  <div className="date__done">Done: {row.dateString() ? row.dateString() : ''}</div>  
+                </td>
+                <td className="task">
+                  <div className="description">{row.text}</div>
+                  <div className="project">Project: {row.projects ? row.projects : ''}</div>
+                  <div className="context">Context: {row.contexts ? row.contexts : ''}</div>
+                </td>
+              </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     );
 }

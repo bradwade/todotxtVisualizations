@@ -14,4 +14,4 @@ x 2020-05-14 (A) Decide on templating... react?
 Review different parsers such as https://www.npmjs.com/package/todotxt-parser
 Clean Pool @home
 Research Spa Cover @computer
-Record Strings for Lead Me Home @studio`;
+Record Strings for Lead Me Home @studio @home`;

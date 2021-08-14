@@ -23,8 +23,7 @@ const Configuration = (props) => {
 
       filesReader.onload = (e) => {
         textBlob = textBlob + '\n' + e.target.result;
-        textDisplayArea.textContent = textBlob;
-        props.setTodo(props.blobParse(textBlob));
+        props.setTodoBlob(textBlob);
       }
     });
   }
@@ -42,7 +41,7 @@ const Configuration = (props) => {
         </div>
       </DragAndDrop>
       <div>File(s) being used: {Array.from(files).map(file => file.name).join(", ")}</div>
-      <pre id="textDisplayArea">(todo.txt will display here)</pre>
+      <pre id="textDisplayArea">{props.todoBlob}</pre>
     </div>
   )
 
