@@ -59,12 +59,13 @@ class DragAndDrop extends React.Component {
   render() {
     return (
       <div 
-        style={{display: 'inline-block', position: 'relative', ...this.props.style}} 
+        style={{display: 'flex', flexDirection: 'column', ...this.props.style}} 
         ref={this.dropRef}
       >
         {this.state.dragging &&
           <div 
             style={{
+              flex: 1,
               border: 'dashed grey 4px',
               backgroundColor: 'rgba(255,255,255,.8)',
               position: 'absolute',

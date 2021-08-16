@@ -6,125 +6,65 @@ $secondary-light:#a4a4a4;
 $secondary-dark:#494949;
 // https://material.io/resources/color/#!/?view.left=0&view.right=0&secondary.color=757575&primary.color=546E7A
 
-body {
-  margin: 0;
-  padding: 0;
-}
+// body {
+//   margin: 0;
+//   padding: 0;
+// }
 
-h1 {
-  margin: 0;
-  padding: 0;
-  color: #eee;
-}
+// .site-main {
+//   padding: 0px;
+//   @media all and (min-width: 500px) {
+//     display: flex;
+//     justify-content: space-between;
+//   }
+// }
 
-.site-header, .site-footer {
-  background-color: $primary-dark;
-  color: white;
-  padding: 20px;
-}
+// html, body, #app {
+//   height: 100%;
+// }
 
-.site-main {
-  padding: 0px;
-  @media all and (min-width: 500px) {
-    display: flex;
-    justify-content: space-between;
-  }
-}
+// .todo-visualizations {
+//   display: flex;
+//   height: 100%;
+//   flex-direction: column;
+// }
 
-.site-navigation {
-  background-color: $primary;
-  .menu {
-    padding: 0;
-    margin: 0 0 25px 0;
-    list-style: none;
-  }
-  .menu__item {
-    margin: 0;
-    padding: 0;
-    a {
-      display: block;
-      border-top: 1px solid $secondary-dark;
-      width: 100%;
-      color: white;
-      padding: 5px;
-      cursor: pointer;
-    }
-  }
+// .dropbox{
+//   width:200px;
+//   height:100px;
+//   border: 1px solid black;
+//   background-color: #e0e0e0;
+//   display: flex;
+//   flex-direction: column;
+//   text-align: center;
+// }
+.drop-zone {
+  width: 100%;
 }
-
-.site-content {
-  background-color: $primary-light;
-  padding: 20px;
+textarea {
   width: 100%;
 }
 
-html, body, #app {
-  height: 100%;
-}
-
-.todo-visualizations {
+.workflow-menu {
   display: flex;
-  height: 100%;
   flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
 }
 
-.site-main {
-  flex: 1 0 auto;
-}
-.site-header, .site-footer {
-  flex-shrink: 0;
+.site-footer-wrapper {
+  margin-top: 20px;
 }
 
-.kanban-view {
-  display: flex;
-  .column {
-    flex: 1 0;
-    margin: 10px;
-    padding: 10px;
-    background-color: #eee;
-    min-height: 200px
+.site-footer {
+  padding: 20px;
+}
+
+.dates > *,
+.context > *,
+.project > * {
+  margin: 4px;
+  &:first-child {
+    margin-left: 0px;
   }
-}
-
-.dropbox{
-  width:200px;
-  height:200px;
-  border: 1px solid black;
-  background-color: #e0e0e0;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-textarea {
-  width: 80%;
-  min-height: 200px;
-  font-size: 12px;
-}
-
-table {
-  border: 1px solid $secondary-light;
-  background-color: white;
-  font-size: 12px;
-}
-
-td, th, td:first-child, th:first-child {
-  padding: 4px;
-}
-
-thead {
-  background-color: $primary;
-  color: white;
-}
-
-tr.even {
-  background-color: #eee;
-}
-
-.description {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.grid-view {
-  display: flex;
 }

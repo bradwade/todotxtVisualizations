@@ -1,14 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Header from './Header';
-import Navigation from './Navigation';
 import Footer from './Footer';
 import Grid from './Grid';
+import Filter from './Filter';
 import Configuration from './Configuration';
 import { defaultTodo } from '../data.js';
 import { TodoTxt } from 'jstodotxt';
 import { TodoTxtExtension } from 'jstodotxt/jsTodoExtensions';
 import { WorkflowExtension, DueExtension2 } from '../myJsTodoExtensions';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { Drawer, ClickAwayListener } from '@material-ui/core';
 
 window.TodoTxtExtension = TodoTxtExtension;
 
@@ -48,53 +51,69 @@ const App = () => {
     contexts: getUnique('contexts'),
     projects: getUnique('projects')
   });
-  const [currentCategories, setCurrentCategories] = useState({});
+  const [currentCategories, setCurrentCategories] = useState({contexts : ['home', 'computer'], projects: ['tdtv']});
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const handleDrawerClose = () => {
+    setDrawerOpen(false);
+  }
+
+  const darkTheme = createTheme({
+    palette: {
+      type: 'dark',
+    },
+  });
 
   return (
-    <div className="todo-visualizations">
-      <Header />
-      <BrowserRouter>
-        <div className="site-main">
-          <Navigation />
-          <div className="site-content">
-            <Switch>
-              <Route exact path="/" 
-                render={
-                  (props) => <Grid {...props} todo={todo} setWorkflow={setWorkflow} workflow={workflow} /> 
-                } 
-              />
-              <Route path="/grid" 
-                render={
-                  (props) => <Grid {...props} todo={todo} setWorkflow={setWorkflow} workflow={workflow}/> 
-                } 
-              />
-              <Route path="/config" 
-                render={(props) => 
-                  <Configuration {...props} 
-                    blobParse={blobParse}
-                    setTodo={setTodo}
-                    todo={todo}
-                    currentCategories={currentCategories}
-                    setCurrentCategories={setCurrentCategories}
-                    categoriesList={categoriesList}
-                    setCategoriesList={setCategoriesList}
-                    todoBlob={todoBlob}
-                    setTodoBlob={setTodoBlob}
-                  /> 
-                } 
+    <ThemeProvider theme={darkTheme}>
+    <CssBaseline/>
+      <div className="todo-visualizations">
+        <BrowserRouter>
+          <Header setDrawerOpen={setDrawerOpen} drawerOpen={drawerOpen} />
+          <Drawer anchor="left" open={drawerOpen}>
+            <Filter 
+              handleDrawerClose={handleDrawerClose}
+              categoriesList={categoriesList}
+              currentCategories={currentCategories}
+              setCurrentCategories={setCurrentCategories}
+            />
+          </Drawer>
+          <div className="site-main">
+            <div className="site-content">
+              <Switch>
+                <Route exact path="/" 
+                  render={
+                    (props) => <Grid {...props} todo={todo} setWorkflow={setWorkflow} workflow={workflow} /> 
+                  } 
                 />
+                <Route path="/config" 
+                  render={(props) => 
+                    <Configuration {...props} 
+                      blobParse={blobParse}
+                      setTodo={setTodo}
+                      todo={todo}
+                      currentCategories={currentCategories}
+                      setCurrentCategories={setCurrentCategories}
+                      categoriesList={categoriesList}
+                      setCategoriesList={setCategoriesList}
+                      todoBlob={todoBlob}
+                      setTodoBlob={setTodoBlob}
+                    /> 
+                  } 
+                  />
 
-              <Route 
-                render={
-                  (props) => <Grid {...props} todo={todo} /> 
-                } 
-              />
-            </Switch>
+                <Route 
+                  render={
+                    (props) => <Grid {...props} todo={todo} /> 
+                  } 
+                />
+              </Switch>
+            </div>
           </div>
-        </div>
-      </BrowserRouter>
-      <Footer />
-    </div>
+        </BrowserRouter>
+        <Footer />
+      </div>
+    </ThemeProvider>
   )
 }
 

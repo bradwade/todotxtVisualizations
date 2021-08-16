@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 const WorkflowMenu = (props) => {
 
@@ -16,11 +18,13 @@ const WorkflowMenu = (props) => {
 
   return (
     <div className="workflow-menu">
-      {wfArray.map((wf, key) => (
-        <button key={key} disabled={props.workflow == wf} onClick={() => props.setWorkflow(wf)}>
-          {wf} ({wfCountObj[wf]})
-        </button>
-      ))}
+      <ButtonGroup variant="contained" color="primary" aria-label="outlined primary button group">
+        {wfArray.map((wf, key) => (
+          <Button key={key} disabled={props.workflow == wf} onClick={() => props.setWorkflow(wf)}>
+            {wf} ({wfCountObj[wf]})
+          </Button>
+        ))}
+      </ButtonGroup>
     </div>
   )
 }

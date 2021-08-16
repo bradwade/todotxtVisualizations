@@ -1,4 +1,4 @@
-export const defaultTodo = `x 2020-05-02 (A) 2020-05-02 Make Handlers objects of functions +tdtv
+export const defaultTodo = `x 2020-05-02 (A) 2020-05-02 Make Handlers objects of functions +tdtv +prodev @computer @home
 (A) due:2020-06-01 Handle Multiple files +tdtv wf:new
 x 2020-05-03 (B) Enable Extensions (global scope?) +tdtv due:2020-06-01 wf:done
 x 2020-05-02 (C) Default to do items. due:2020-06-01 +tdtv +bradwade.com wf:done

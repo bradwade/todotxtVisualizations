@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
-import DragAndDrop from './DragAndDrop'
+import DragAndDrop from './DragAndDrop';
+import { Typography, TextareaAutosize, Button, Container } from '@material-ui/core';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 const Configuration = (props) => {
 
@@ -30,18 +32,33 @@ const Configuration = (props) => {
 
   return (
     <div className="configuration">
-      <h2>Load Data</h2>
-      <p>Browse for a todo.txt file or drag-and-drop a file on the grey square.</p>
-      <form>
-        <input multiple type="file" name="file" onChange={handleFileInput}/>
-      </form>
       <DragAndDrop handleDrop={handleDrop}>
-        <div className="dropbox" style={{height: 300, width: 250}}>
-
-        </div>
+        <Container>
+          <Typography variant="h4">Load Data</Typography>
+          <Typography variant="body1" component="div">
+            <p>Browse for your todo.txt file (or drag-and-drop a file onto this window).</p>
+            <form>
+              <input multiple type="file" name="file" onChange={handleFileInput}/>
+            </form>
+            <Typography variant="h4">Files</Typography>
+            <div>File(s) being used: {Array.from(files).map(file => file.name).join(", ")}</div>
+            <Typography variant="h4">Raw todo.txt</Typography>
+            <form>
+            <TextareaAutosize
+              aria-label="todo.txt raw text"
+              placeholder="You can manually enter todo items here."
+              defaultValue={props.todoBlob}
+            />
+              <Button
+                variant="contained"
+                color="primary"
+              >
+                Submit
+              </Button>
+            </form>
+          </Typography>
+        </Container>
       </DragAndDrop>
-      <div>File(s) being used: {Array.from(files).map(file => file.name).join(", ")}</div>
-      <pre id="textDisplayArea">{props.todoBlob}</pre>
     </div>
   )
 
