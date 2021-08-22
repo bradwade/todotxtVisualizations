@@ -1,5 +1,5 @@
 export const defaultTodo = `x 2020-05-02 (A) 2020-05-02 Make Handlers objects of functions +tdtv +prodev @computer @home
-(A) due:2020-06-01 Handle Multiple files +tdtv wf:new
+(A) due:2020-06-01 Handle Multiple files +tdtv @computer wf:new
 x 2020-05-03 (B) Enable Extensions (global scope?) +tdtv due:2020-06-01 wf:done
 x 2020-05-02 (C) Default to do items. due:2020-06-01 +tdtv +bradwade.com wf:done
 (F) Pull in inspirational quotes. +tdtv due:2020-06-01 wf:doing
@@ -14,4 +14,5 @@ x 2020-05-14 (A) Decide on templating... react?
 Review different parsers such as https://www.npmjs.com/package/todotxt-parser
 Clean Pool @home
 Research Spa Cover @computer
-Record Strings for Lead Me Home @studio @home`;
+Record Strings for Lead Me Home @studio @home
+(A) incorporate https://material-ui.com/ +tdtv wf:doing`;

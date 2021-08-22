@@ -35,8 +35,8 @@ const App = () => {
     return syncedArray;
   }
 
-  const getUnique = (thing) => {
-    return todo
+  const getUnique = (thing, todoObj) => {
+    return todoObj
     .map(item=>item[thing])
     .filter((item)=>item)
     .reduce((acc, e) =>  acc.concat(e), [])
@@ -44,15 +44,77 @@ const App = () => {
     .sort();
   }
 
+  const updateDataFromBlob = (textBlob) => {
+    setTodoBlob(textBlob);
+    const todoObj = blobParse(textBlob);
+    setTodo(todoObj);
+    setCategoriesList({
+      contexts: getUnique('contexts', todoObj),
+      projects: getUnique('projects', todoObj)
+    });
+  }
+
+  const wfFilter = (todoItem) => {
+    return todoItem.wf == currentFilters.workflow;
+  }
+
+  const contextsFilter = (todoItem) => {
+    // If there are no current contexts selected show everything.
+    if (currentFilters.contexts.length === 0) return true;
+    // If this item doesn't have a context don't show it.
+    if (!todoItem.contexts) return false;
+
+    // Loop through the item's contexts and see if they are in current contexts
+    let found = false;
+    todoItem.contexts.forEach(itemContext => {
+      if (currentFilters.contexts.includes(itemContext)) {
+        found = true;
+      }
+    });
+    if (found == true) {return true;} else {return false;}
+  }
+
+  const projectsFilter = (todoItem) => {
+    // If there are no current projects selected show everything.
+    if (currentFilters.projects.length === 0) return true;
+    // If this item doesn't have a context don't show it.
+    if (!todoItem.projects) return false;
+
+    // Loop through the item's projects and see if they are in current projects
+    let found = false;
+    todoItem.projects.forEach(itemContext => {
+      if (currentFilters.projects.includes(itemContext)) {
+        found = true;
+      }
+    });
+    if (found == true) {return true;} else {return false;}
+  }
+
+  const filterTodo = () => {
+    setFilteredTodo(
+      todo
+      .filter(wfFilter)
+      .filter(contextsFilter)
+      .filter(projectsFilter)
+    )
+  }
+
   const [todoBlob, setTodoBlob] = useState(defaultTodo);
   const [todo, setTodo] = useState(blobParse(todoBlob));
   const [workflow, setWorkflow] = useState('new');
   const [categoriesList, setCategoriesList] = useState({
-    contexts: getUnique('contexts'),
-    projects: getUnique('projects')
+    contexts: getUnique('contexts', todo),
+    projects: getUnique('projects', todo)
   });
-  const [currentCategories, setCurrentCategories] = useState({contexts : ['home', 'computer'], projects: ['tdtv']});
+  const [currentFilters, setCurrentFilters] = useState(
+    {
+      contexts : [],
+      projects: [],
+      workflow: 'new'
+    }
+  );
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [filteredTodo, setFilteredTodo] = useState(todo.filter(wfFilter));
 
   const handleDrawerClose = () => {
     setDrawerOpen(false);
@@ -74,8 +136,9 @@ const App = () => {
             <Filter 
               handleDrawerClose={handleDrawerClose}
               categoriesList={categoriesList}
-              currentCategories={currentCategories}
-              setCurrentCategories={setCurrentCategories}
+              currentFilters={currentFilters}
+              setCurrentFilters={setCurrentFilters}
+              filterTodo={filterTodo}
             />
           </Drawer>
           <div className="site-main">
@@ -83,21 +146,26 @@ const App = () => {
               <Switch>
                 <Route exact path="/" 
                   render={
-                    (props) => <Grid {...props} todo={todo} setWorkflow={setWorkflow} workflow={workflow} /> 
+                    (props) => 
+                      <Grid {...props}
+                        filteredTodo={filteredTodo}
+                        todo={todo}
+                        setWorkflow={setWorkflow}
+                        workflow={workflow}
+                        currentFilters={currentFilters}
+                        setCurrentFilters={setCurrentFilters}
+                        filterTodo={filterTodo}
+                      /> 
                   } 
                 />
                 <Route path="/config" 
                   render={(props) => 
                     <Configuration {...props} 
-                      blobParse={blobParse}
-                      setTodo={setTodo}
                       todo={todo}
-                      currentCategories={currentCategories}
-                      setCurrentCategories={setCurrentCategories}
+                      currentFilters={currentFilters}
                       categoriesList={categoriesList}
-                      setCategoriesList={setCategoriesList}
                       todoBlob={todoBlob}
-                      setTodoBlob={setTodoBlob}
+                      updateDataFromBlob={updateDataFromBlob}
                     /> 
                   } 
                   />

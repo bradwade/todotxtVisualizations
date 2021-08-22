@@ -25,7 +25,8 @@ const Configuration = (props) => {
 
       filesReader.onload = (e) => {
         textBlob = textBlob + '\n' + e.target.result;
-        props.setTodoBlob(textBlob);
+        console.log(textBlob);
+        props.updateDataFromBlob(textBlob);
       }
     });
   }
@@ -42,8 +43,17 @@ const Configuration = (props) => {
             </form>
             <Typography variant="h4">Files</Typography>
             <div>File(s) being used: {Array.from(files).map(file => file.name).join(", ")}</div>
+            <Typography variant="h4">Categories</Typography>
+              {Object.entries(props.categoriesList).map(([key, value]) => {
+                return (
+                  <div key={key} className="filter-section">
+                    <Typography variant="h5">{key}</Typography>
+                      {value.map((category, index) => <li key={index}>{category}</li>)}
+                  </div>
+                )
+              })}
             <Typography variant="h4">Raw todo.txt</Typography>
-            <form>
+            {/* <form>
             <TextareaAutosize
               aria-label="todo.txt raw text"
               placeholder="You can manually enter todo items here."
@@ -55,8 +65,10 @@ const Configuration = (props) => {
               >
                 Submit
               </Button>
-            </form>
+            </form> */}
+            <pre id="textDisplayArea">{props.todoBlob}</pre>
           </Typography>
+
         </Container>
       </DragAndDrop>
     </div>

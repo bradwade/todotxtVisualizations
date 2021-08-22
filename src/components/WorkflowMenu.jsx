@@ -16,11 +16,19 @@ const WorkflowMenu = (props) => {
 
   const wfArray = ['new', 'doing', 'done', 'blocked'];
 
+  const handleWorkflowChange = (e) => {
+    props.setWorkflow(e.target.closest('button').value);
+    const cf = props.currentFilters;
+    cf.workflow = e.target.closest('button').value;
+    props.setCurrentFilters(cf);
+    props.filterTodo();
+  }
+
   return (
     <div className="workflow-menu">
       <ButtonGroup variant="contained" color="primary" aria-label="outlined primary button group">
         {wfArray.map((wf, key) => (
-          <Button key={key} disabled={props.workflow == wf} onClick={() => props.setWorkflow(wf)}>
+          <Button key={key} disabled={props.workflow == wf} value={wf} onClick={handleWorkflowChange}>
             {wf} ({wfCountObj[wf]})
           </Button>
         ))}
