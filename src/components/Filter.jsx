@@ -58,7 +58,7 @@ const Filter = (props) => {
                         onChange={handleCategoryChange}
                         value={item}
                         inputProps={{'data-category':key}}
-                        // checked={props.currentFilters[key].includes(item)}
+                        checked={props.currentFilters[key].includes(item)}
                       />
                       }
                     label={item}
