@@ -68,3 +68,18 @@ textarea {
     margin-left: 0px;
   }
 }
+
+.settings-card {
+  padding:10px 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  &.MuiTypography-root {
+    margin-top: .25em;
+    margin-bottom: .25em;
+  }
+}
+
+.file-upload-divider.MuiDivider-root {
+  margin-top: 1.5em;
+}
